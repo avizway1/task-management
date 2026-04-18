@@ -1,0 +1,217 @@
+/* =============================================
+   style.css - Plain CSS for the Task Manager
+   No frameworks, just simple hand-written styles
+   ============================================= */
+
+/* --- Reset & Base --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+}
+
+/* --- Page Container --- */
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* --- Header --- */
+header {
+  margin-bottom: 2rem;
+}
+
+header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+header .subtitle {
+  margin-top: 0.25rem;
+  color: #777;
+  font-size: 0.95rem;
+}
+
+/* --- Add Task Form --- */
+.add-task-section {
+  margin-bottom: 1.25rem;
+}
+
+.add-form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.add-form input[type="text"] {
+  flex: 1;
+  padding: 0.6rem 0.9rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.add-form input[type="text"]:focus {
+  border-color: #4a90e2;
+}
+
+.add-form button {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  background-color: #fff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.2s;
+}
+
+.add-form button:hover {
+  background-color: #357abd;
+}
+
+/* --- Summary Line --- */
+.summary {
+  font-size: 0.875rem;
+  color: #888;
+  margin-bottom: 1rem;
+}
+
+.summary .dot {
+  margin: 0 0.4rem;
+}
+
+.summary .pending-count {
+  color: #e07b39;
+}
+
+.summary .done-count {
+  color: #4caf50;
+}
+
+/* --- Task List --- */
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+/* --- Individual Task Card --- */
+.task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  transition: opacity 0.2s;
+}
+
+/* Completed task: muted appearance */
+.task-item.done {
+  opacity: 0.6;
+  background-color: #fafafa;
+}
+
+/* --- Task Info (left side) --- */
+.task-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0; /* allows long text to truncate */
+}
+
+.task-title {
+  font-size: 1rem;
+  font-weight: 500;
+  word-break: break-word;
+}
+
+/* Strikethrough for completed tasks */
+.task-item.done .task-title {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.task-meta {
+  font-size: 0.78rem;
+  color: #aaa;
+}
+
+/* Status badges */
+.badge-pending {
+  color: #e07b39;
+  font-weight: 600;
+}
+
+.badge-done {
+  color: #4caf50;
+  font-weight: 600;
+}
+
+/* --- Action Buttons (right side) --- */
+.task-actions {
+  display: flex;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+.task-actions button {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.85rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.btn-complete {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.btn-complete:hover {
+  background-color: #c8e6c9;
+}
+
+.btn-reopen {
+  background-color: #fff3e0;
+  color: #e07b39;
+}
+
+.btn-reopen:hover {
+  background-color: #ffe0b2;
+}
+
+.btn-delete {
+  background-color: #fdecea;
+  color: #c62828;
+}
+
+.btn-delete:hover {
+  background-color: #ffcdd2;
+}
+
+/* --- Empty State --- */
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #aaa;
+  font-size: 0.95rem;
+  border: 2px dashed #ddd;
+  border-radius: 8px;
+}

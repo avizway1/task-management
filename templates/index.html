@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task Manager</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- Header -->
+    <header>
+      <h1>Task Manager</h1>
+      <p class="subtitle">Keep track of what needs to get done.</p>
+    </header>
+
+    <!-- Add Task Form -->
+    <section class="add-task-section">
+      <form action="/add" method="POST" class="add-form">
+        <input
+          type="text"
+          name="title"
+          placeholder="What needs to be done?"
+          required
+          maxlength="200"
+          autocomplete="off"
+        />
+        <button type="submit">Add Task</button>
+      </form>
+    </section>
+
+    <!-- Task Count Summary -->
+    <section class="summary">
+      {% set total = tasks | length %}
+      {% set done_count = tasks | selectattr("done", "equalto", 1) | list | length %}
+      {% set pending_count = total - done_count %}
+      <span>{{ total }} task{{ 's' if total != 1 else '' }} total</span>
+      <span class="dot">·</span>
+      <span class="pending-count">{{ pending_count }} pending</span>
+      <span class="dot">·</span>
+      <span class="done-count">{{ done_count }} completed</span>
+    </section>
+
+    <!-- Task List -->
+    <section class="task-list">
+
+      {% if tasks %}
+        {% for task in tasks %}
+        <div class="task-item {% if task['done'] %}done{% endif %}">
+
+          <!-- Task Info -->
+          <div class="task-info">
+            <span class="task-title">{{ task['title'] }}</span>
+            <span class="task-meta">
+              Added {{ task['created_at'] }}
+              {% if task['done'] %}
+                &mdash; <span class="badge-done">Completed</span>
+              {% else %}
+                &mdash; <span class="badge-pending">Pending</span>
+              {% endif %}
+            </span>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="task-actions">
+
+            <!-- Show "Complete" only if task is not done yet -->
+            {% if not task['done'] %}
+            <form action="/complete/{{ task['id'] }}" method="POST" style="display:inline;">
+              <button type="submit" class="btn-complete">Complete</button>
+            </form>
+            {% endif %}
+
+            <!-- Show "Re-open" only if task is done -->
+            {% if task['done'] %}
+            <form action="/reopen/{{ task['id'] }}" method="POST" style="display:inline;">
+              <button type="submit" class="btn-reopen">Re-open</button>
+            </form>
+            {% endif %}
+
+            <!-- Delete button always visible -->
+            <form action="/delete/{{ task['id'] }}" method="POST" style="display:inline;"
+                  onsubmit="return confirm('Delete this task?');">
+              <button type="submit" class="btn-delete">Delete</button>
+            </form>
+
+          </div>
+        </div>
+        {% endfor %}
+
+      {% else %}
+        <!-- Empty state -->
+        <div class="empty-state">
+          <p>No tasks yet. Add one above to get started!</p>
+        </div>
+      {% endif %}
+
+    </section>
+
+  </div><!-- /container -->
+
+</body>
+</html>

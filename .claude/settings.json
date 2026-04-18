@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /Users/avizway/Desktop/claude-code-projects/task-management/templates/faaah.mp3 2>/dev/null || true",
+            "async": true
+          }
+        ]
+      }
+    ]
+  }
+}
