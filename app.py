@@ -11,7 +11,6 @@ import database
 # Create the Flask application instance
 app = Flask(__name__)
 
-
 @app.route("/")
 def index():
     """Show the main dashboard with all tasks."""

@@ -12,7 +12,8 @@
 
     <!-- Header -->
     <header>
-      <h1>Task Manager</h1>
+      <img src="{{ url_for('static', filename='aviz-logo.png') }}" alt="Aviz Academy Logo" class="header-logo" />
+      <h1>Task manager by Aviz for Claude Code Series</h1>
       <p class="subtitle">Keep track of what needs to get done.</p>
     </header>
 
@@ -93,13 +94,21 @@
       {% else %}
         <!-- Empty state -->
         <div class="empty-state">
-          <p>No tasks yet. Add one above to get started!</p>
+          <p>Nothing to do yet... add a task to get started!</p>
         </div>
       {% endif %}
 
     </section>
 
   </div><!-- /container -->
+
+  <footer class="site-footer">
+    <p>&copy; Aviz Academy 2026 &mdash;
+      <a href="#">YouTube</a> &middot;
+      <a href="#">LinkedIn</a> &middot;
+      <a href="#">GitHub</a>
+    </p>
+  </footer>
 
 </body>
 </html>
